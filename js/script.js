@@ -46,8 +46,12 @@ $(document).ready(function(){
 
       
       setTimeout(function(){
-        $('#display').text(correct_numbers);
-        $('#start').text('Play again');
+        if(correct_numbers.length === 0){
+          $('#display').text('hai perso!');
+        }else{
+          $('#display').text(correct_numbers);
+          $('#start').text('Play again');
+        }
         reset();        
       }, 3000);
   
