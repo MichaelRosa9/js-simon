@@ -7,6 +7,7 @@ $(document).ready(function(){
   reset();
   var npc_numbers = [];
   var player_numbers = [];
+  var correct_numbers = [];
 
   $('#start').click(function(){
 
@@ -26,27 +27,34 @@ $(document).ready(function(){
 
 
   $('#submit').click(function(){ 
-    var player_input = $('input').val();
+    var player_input =parseInt($('input').val());
+
     player_numbers.push(player_input);
+    console.log('npc numbers' + npc_numbers);
+    
+    if(npc_numbers.includes(player_input)){
+      correct_numbers.push(player_input);
+    }
+
+    console.log(correct_numbers);
+    
     player_input = $('input').val('');
 
     if(player_numbers.length === npc_numbers.length){
       $('#game').hide();
       $('#display').text('Verifica numeri selezionati...');
 
+      
       setTimeout(function(){
-        compare(player_numbers, npc_numbers);
-        if(compare === false){
-          $('#display').text('Hai perso');
-        }else{
-          $('#display').text('hai vinto')
-        }
-        reset()
+        $('#display').text(correct_numbers);
+        $('#start').text('Play again');
+        reset();        
       }, 3000);
   
+
     }
-    console.log(player_numbers);
   });
+
 
 
 });//END $(document).ready()
@@ -65,12 +73,11 @@ function randomNumber(min, max){
   return Math.floor(Math.random()* (max - min + 1) + min);
 }
 
-function compare(arr1, arr2){  
+/* function compare(num, arr1, ){
   for(i = 0; i < arr1.length; i++){
-    if(arr1[i] !== arr2[i]){
-      return false;
-    }else{
-      return true;
+
+    if(arr.includes(num)){
+      
     }
-  }  
-}
+  }
+} */
